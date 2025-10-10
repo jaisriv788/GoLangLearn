@@ -32,4 +32,13 @@ func main() {
 	for i, val := range params {
 		fmt.Printf("Key : %v; Value : %v \n", i, val)
 	}
+
+	partsOfUrl := &url.URL{
+		Scheme:   "http",
+		Host:     "jaisrivastava788.github.io:5173",
+		Path:     "/details",
+		RawQuery: "email=jaisrivastava788@gmail.com&age=10",
+	}
+
+	fmt.Println(partsOfUrl)
 }

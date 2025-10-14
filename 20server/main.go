@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"strings"
 )
 
@@ -12,6 +13,7 @@ func main() {
 
 	getRequest()
 	postRequest()
+	postFormRequest()
 }
 
 func getRequest() {
@@ -62,4 +64,25 @@ func postRequest() {
 
 	fmt.Println("Bytecount is: ", bytecount)
 	fmt.Println(responseString.String())
+}
+
+func postFormRequest() {
+	const myurl = "http://localhost:3000/get"
+
+	//form data
+	data := url.Values{}
+	data.Add("name", "Jai Srivastava")
+	data.Add("age", "25")
+
+	response, err := http.PostForm(myurl, data)
+
+	if err != nil {
+		panic(err)
+	}
+
+	content, _ := io.ReadAll(response.Body)
+
+	defer response.Body.Close()
+
+	fmt.Println(string(content))
 }
